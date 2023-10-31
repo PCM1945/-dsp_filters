@@ -1,16 +1,26 @@
-package load signal;
-function y = myFIR(cutoffFreq, type, fs, f0, f1)
+function y = myFIR()
+  # cutoffFreq, type, order ,fs, f0, f1
+  pkg load signal;
  % The filter type can be specified with one of the following strings:
  % "low", "high", "stop", "pass", "bandpass", "DC-0", or "DC-1". The default is
  % "low" if cutoffFreq is a scalar,
  % "pass" if cutoffFreq is a pair, or "DC-0" if cutoffFreq is a vector with
  % more than 2 elements.
 
-  f =  [cutoffFreq]/(fs/2);
-  n = round(order) - 1;
-  delta = f0-f1;
-  db = 60;
-  order = db*fs/(22*delta)
+ cutoff_freq = 300;
+ fs = 1000;
+ filter_type = "low";
+ order = 10;
 
-  return fir1(order, f, type)
+%Normalize cutoff
+normal_cutoff = cutoff_freq / (0.5 * fs);
+figure;
+plot(normal_cutoff)
+%FIR typed Pass Filter
 
+imp_response = fir1(order, normal_cutoff, filter_type);
+
+figure
+freqz(imp_response, fs, []);
+
+end
