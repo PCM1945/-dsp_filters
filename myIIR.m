@@ -1,16 +1,20 @@
-function y = myIIR(type, fs, cutOfFreq, order)
+function y = myIIR()
+  #type, fs, cutOfFreq, order, input
+  type = 'low';
+  fs = 1000;
+  cutOfFreq = 200;
+  order = 4;
+
   pkg load signal;
 
-  wa = (2/fs) * tan(pi * (cutOfFreq/fs));
+  fa = (fs/pi) * tan(pi * (cutOfFreq/fs));
 
-  [sb, sa] = butter(order, wa, type, 's');
-  [zb, za] = bilinear(sb, sa, fs);
-  figure;
-  plot(zb);
-  title('ZB');
-  figure;
-  plot(za)
-  title('za')
-  figure;
+  [sb, sa] = butter(order, fa, type, 's');
+  [zb, za] = bilinear(sb, sa, 1/fs);
+
   freqz(zb, za, [], fs);
+
+  #y = filter(zb, za, input);
+  #plot(y);
+  #title('filtred signal');
 end

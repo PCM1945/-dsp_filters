@@ -1,5 +1,5 @@
 function y = myFIR()
-  # cutoffFreq, type, order ,fs, f0, f1
+  # cutoffFreq, type, order ,fs, input
   pkg load signal;
  % The filter type can be specified with one of the following strings:
  % "low", "high", "stop", "pass", "bandpass", "DC-0", or "DC-1". The default is
@@ -23,4 +23,7 @@ imp_response = fir1(order, normal_cutoff, filter_type);
 figure
 freqz(imp_response, fs, []);
 
+#y = filter(imp_response, 1, input_signal);
+# plot(y);
+# title('filtred signal');
 end
