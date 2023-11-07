@@ -1,8 +1,8 @@
 function y = myIIR()
   #type, fs, cutOfFreq, order, input
   type = 'low';
-  fs = 1000;
-  cutOfFreq = 200;
+  fs = 44100;
+  cutOfFreq = 250;
   order = 4;
 
   pkg load signal;
@@ -10,6 +10,7 @@ function y = myIIR()
   fa = (fs/pi) * tan(pi * (cutOfFreq/fs));
 
   [sb, sa] = butter(order, fa, type, 's');
+
   [zb, za] = bilinear(sb, sa, 1/fs);
 
   freqz(zb, za, [], fs);
