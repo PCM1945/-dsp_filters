@@ -9,13 +9,13 @@ function y = myFIR()
  % "pass" if cutoffFreq is a pair, or "DC-0" if cutoffFreq is a vector with
  % more than 2 elements.
 
-% low: 23000
+% low: 23000 cf = 250
 % pass:
-%high:
+% high: 2000 cf = 2000
 
- cutoff_freq = 250;
+ cutoff_freq = [250, 2000];
  fs = 44100;
- filter_type = "low";
+ filter_type = "pass";
  order = 23000;
 
 %Normalize cutoff
