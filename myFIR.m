@@ -1,6 +1,5 @@
-function y = myFIR()
-  clear
-  close all
+function myFIR(data,fs,filter_type,order)
+
   # cutoffFreq, type, order ,fs, input
   pkg load signal;
  % The filter type can be specified with one of the following strings:
@@ -13,10 +12,17 @@ function y = myFIR()
 % pass: 23000 cf =  [250, 2000]
 % high: 23000 cf = 2000
 
+ %cutoff_freq = [250, 2000];
+ %fs = 44100;
+ %filter_type = "pass";
+ %order = 23000;
+ if(filter_type == "low"){
+ cutoff_freq = 250;
+ }elseif(filter_type == "pass"){
  cutoff_freq = [250, 2000];
- fs = 44100;
- filter_type = "pass";
- order = 23000;
+ }elseif(filter_type == "high"){
+ cutoff_freq = 2000;
+ }
 
 %Normalize cutoff
 normal_cutoff = cutoff_freq / (0.5 * fs);
@@ -25,7 +31,7 @@ normal_cutoff = cutoff_freq / (0.5 * fs);
 
 imp_response = fir1(order, normal_cutoff, filter_type);
 
-freqz(imp_response, 1, [],fs);
+freqz(imp_response, 1, data,fs);
 
 #y = filter(imp_response, 1, input_signal);
 # plot(y);
