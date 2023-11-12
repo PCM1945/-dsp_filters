@@ -1,6 +1,6 @@
 [voz, Fs] = audioread('processamentodigitaldesinais.wav');
 
-myFIR(voz, Fs, "low", 23000);
+%myFIR(voz, Fs, "low", 23000);
 
 %myFIR(voz, Fs, "pass", 23000);
 

@@ -2,6 +2,8 @@
 % Leitura do arquivo de áudio
 [sinal, taxa_amostragem] = audioread('Mario.wav');
 
+taxa_amostragem = 41000;
+
 % Defina o tempo inicial e a duração desejada em segundos
 tempo_inicial = 0; % segundos
 duracao = 5; % segundos
